@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>ppUnityProjectBUILD</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <title>Poppy Playtime Web</title>
+    <link rel="icon" href="data:,">
     <style>
       html, body {
         margin: 0;
@@ -63,12 +63,12 @@
         }
       }
 
-      async function fetchAndDecompress(url, mimeType) {
+      async function fetchAndDecompress(url, mimeType, ext) {
         const response = await fetch(url);
         const ds = new DecompressionStream("gzip");
         const decompressedStream = response.body.pipeThrough(ds);
         const blob = await new Response(decompressedStream).blob();
-        return URL.createObjectURL(new Blob([blob], { type: mimeType }));
+        return URL.createObjectURL(new Blob([blob], { type: mimeType })) + ext;
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
@@ -81,9 +81,9 @@
       script.onload = async () => {
         try {
           const [dataUrl, frameworkUrl, codeUrl] = await Promise.all([
-            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.data.gz", "application/octet-stream"),
-            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.framework.js.gz", "application/javascript"),
-            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.wasm.gz", "application/wasm")
+            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.data.gz", "application/octet-stream", ""),
+            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.framework.js.gz", "application/javascript", "#ext=.js"),
+            fetchAndDecompress(buildUrl + "/PoppyplaytimeWeb.wasm.gz", "application/wasm", "#ext=.wasm")
           ]);
 
           var config = {
