@@ -1,4 +1,5 @@
 Hey!
-Open #prodbybiell.github.io/game/gpt
+Open #prodbybiell.github.io/game/
 its a GrabPack Test!
-its a 3d game, 109mb lol
+
+prodbybiell.github.io/game/
